@@ -7,6 +7,7 @@ import java.util.List;
 
 /**
  * File reader class that reads from txt file which arguments used in tests
+ * Was not used in test cases but it was in requirements so it should work if needed if initiated :)
  */
 
 public class FileReader {
