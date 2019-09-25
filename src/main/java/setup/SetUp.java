@@ -27,7 +27,7 @@ public abstract class SetUp {
         driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        driver.get("http://141.136.44.216:8080/kodas-spring-1.0-SNAPSHOT");
+        driver.get("http://192.168.1.178/opencartone/");
     }
 
     /**
