@@ -1,5 +1,7 @@
 package page;
 
+import org.assertj.core.api.SoftAssertions;
+import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -13,6 +15,8 @@ import java.util.List;
  */
 
 public class WebElementsPage extends AbstractPage{
+    SoftAssertions softAssertions = new SoftAssertions();
+
     public WebElementsPage(WebDriver driver) {
         super(driver);
     }
@@ -49,6 +53,8 @@ public class WebElementsPage extends AbstractPage{
 
     @FindBy(xpath = "//li[contains(text(),'Availability:')]")
     private WebElement availabilityInfo;
+    @FindBy(xpath = "/html[1]/body[1]/div[2]/div[1]/div[1]/div[1]/div[2]/h1[1]")
+    private WebElement productName;
 
 
 
@@ -72,14 +78,27 @@ public class WebElementsPage extends AbstractPage{
     }
 
     public String getAvailabilityInfoMessage() {
-        return availabilityInfo.getText();
+        return availabilityInfo.getText().replace("Availability: ", "");
+    }
+
+    public void checkAvailability() {
+        if (getAvailabilityInfoMessage().equals("In Stock")) {
+            Assert.assertEquals("Product is not available", "In Stock", getAvailabilityInfoMessage());
+            System.out.println("Product "+ getProductName() + " is available");
+        } else {
+            System.out.println("Product " + getProductName() + " availability is " + getAvailabilityInfoMessage());
+        }
+    }
+
+    public String getProductName() {
+        return productName.getText();
     }
 
     public List<String> checkListOfLaptopsAndNotebooks() {
         List<String> list = new ArrayList<String>();
         for (int i = 0; i < listOfLaptops.size(); i++) {
             listOfLaptops.get(i).click();
-            System.out.println(getAvailabilityInfoMessage());
+            checkAvailability();
             getLaptopsAndNotebooks();
         }
         return list;
@@ -89,7 +108,7 @@ public class WebElementsPage extends AbstractPage{
         List<String> list = new ArrayList<String>();
         for (int i = 0; i < listOfCameras.size(); i++) {
             listOfCameras.get(i).click();
-            System.out.println(getAvailabilityInfoMessage());
+            checkAvailability();
             getCameras();
         }
         return list;
@@ -99,7 +118,7 @@ public class WebElementsPage extends AbstractPage{
         List<String> list = new ArrayList<String>();
         for (int i = 0; i < listOfMp3.size(); i++) {
             listOfMp3.get(i).click();
-            System.out.println(getAvailabilityInfoMessage());
+            checkAvailability();
             getMP3Players();
         }
         return list;
@@ -109,7 +128,7 @@ public class WebElementsPage extends AbstractPage{
         List<String> list = new ArrayList<String>();
         for (int i = 0; i < listOfPhones.size(); i++) {
             listOfPhones.get(i).click();
-            System.out.println(getAvailabilityInfoMessage());
+            checkAvailability();
             getPhonesAndPDAs();
         }
         return list;
@@ -119,7 +138,7 @@ public class WebElementsPage extends AbstractPage{
         List<String> list = new ArrayList<String>();
         for (int i = 0; i < listOfTablets.size(); i++) {
             listOfTablets.get(i).click();
-            System.out.println(getAvailabilityInfoMessage());
+            checkAvailability();
             getTablets();
         }
         return list;

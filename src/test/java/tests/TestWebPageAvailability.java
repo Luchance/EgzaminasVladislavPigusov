@@ -5,7 +5,7 @@ import page.WebElementsPage;
 import setup.SetUp;
 
 /**
- * Basic test to insure that WebPage and WebElements functioning right
+ * Basic helper test to insure that WebPage and WebElements functioning right
  * Navigates to needed tabs without interruptions
  */
 
